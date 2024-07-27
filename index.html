@@ -8,7 +8,7 @@
     <style>
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             color: #fff;
             background-color: #000;
         }
@@ -16,16 +16,22 @@
         .navbar {
             display: flex;
             justify-content: flex-end;
-            background-color: #333;
-            padding: 10px;
-            position: relative; /* Change from fixed to relative */
+            background-color: #222;
+            padding: 10px 20px;
+            position: relative;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
         }
 
         .navbar a {
             color: #fff;
             text-decoration: none;
-            padding: 10px;
-            display: block;
+            padding: 10px 15px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .navbar a:hover {
+            background-color: #444;
+            color: #ff9900;
         }
 
         .slider {
@@ -44,9 +50,10 @@
         .slide {
             min-width: 100%;
             height: 100%;
-            display: flex; /* Flexbox to center the image */
+            display: flex;
             align-items: center;
             justify-content: center;
+            transition: opacity 1s;
         }
 
         .slide img {
@@ -70,10 +77,11 @@
             background-color: #bbb;
             border-radius: 50%;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
 
-        .dot.active {
-            background-color: #717171;
+        .dot.active, .dot:hover {
+            background-color: #ff9900;
         }
 
         .arrow {
@@ -86,6 +94,11 @@
             font-size: 24px;
             cursor: pointer;
             padding: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .arrow:hover {
+            background-color: rgba(0, 0, 0, 0.7);
         }
 
         .left-arrow {
@@ -97,14 +110,26 @@
         }
 
         .description, .media, .testimonials, .brands {
-            padding: 20px;
-            text-align: center; /* Center align text */
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .description h1, .media h2, .testimonials h2, .brands h2 {
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            color: #ff9900;
+        }
+
+        .description p, .testimonial-card p {
+            font-size: 1.2em;
+            line-height: 1.5;
         }
 
         .media {
             display: flex;
             justify-content: center;
-            gap: 20px; /* Add spacing between elements */
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
         .media .video, .media .pictures {
@@ -113,26 +138,35 @@
 
         .video video {
             width: 100%;
+            border: 2px solid #444;
+            border-radius: 10px;
         }
 
         .pictures img {
             width: 100%;
             margin-bottom: 10px;
+            border: 2px solid #444;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .pictures img:hover {
+            transform: scale(1.05);
         }
 
         .testimonial-cards, .brand-cards {
             display: flex;
-            justify-content: center; /* Center align cards */
-            gap: 20px; /* Add spacing between cards */
-            flex-wrap: wrap; /* Allow cards to wrap */
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
         .testimonial-card, .brand-card {
-            background-color: #060606;
+            background-color: #222;
             padding: 20px;
-            width: 150px; /* Adjust width for better display */
-            height: auto; /* Adjust height */
-            border-radius: 5px;
+            width: 200px;
+            height: auto;
+            border-radius: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -150,39 +184,49 @@
         }
 
         .testimonial-card img, .brand-card img {
-            width: 80px; /* Adjust size of images */
-            height: 80px; /* Adjust size of images */
-            border-radius: 50%; /* Circular shape for client pictures */
-            margin-bottom: 10px; /* Spacing between image and text */
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            border: 2px solid #444;
         }
 
         .footer {
-    background-color: #000000;
-    color: #fff;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between; /* Distribute items across the width */
-    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
-}
+            background-color: #000;
+            color: #fff;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            border-top: 2px solid #444;
+        }
 
-.footer .footer-item {
-    flex: 1; /* Allow items to take up equal space */
-    margin: 10px;
-    text-align: center; /* Center text within each item */
-}
+        .footer .footer-item {
+            flex: 1;
+            margin: 10px;
+            text-align: center;
+        }
 
-.footer .footer-item a {
-    color: #fff;
-    text-decoration: none;
-}
+        .footer .footer-item h2 {
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            color: #ff9900;
+        }
 
-.footer .footer-item a:hover {
-    text-decoration: underline;
-}
+        .footer .footer-item a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
 
-.footer .social-links a {
-    margin: 0 10px;
-}
+        .footer .footer-item a:hover {
+            text-decoration: underline;
+            color: #ff9900;
+        }
+
+        .footer .social-links a {
+            margin: 0 10px;
+        }
 
     </style>
 </head>
@@ -244,7 +288,6 @@
                     <img src="images/user1.webp" alt="Client C">
                     <p>Exceeded our expectations in every way. - Client C</p>
                 </div>
-                <!-- Add more testimonials as needed -->
             </div>
         </section>
 
@@ -261,77 +304,67 @@
                 <div class="brand-card">
                     <img src="images/apple.jpg" alt="Brand 3">
                 </div>
-                <!-- Add more brands as needed -->
             </div>
         </section>
     </main>
 
     <!-- Footer -->
-<footer class="footer">
-    <div class="footer-item address">
-        <p><strong><h2>Address</h2></strong></p>
-        <p>1234 Street,</p>
-        <p> City: New Delhi,</p>
-        <p> Country: India</p>
-    </div>
-    <div class="footer-item contact">
-        <p><strong><h2>Contact Us </h2></strong></p>
-        <p> +91-123 456 7890</p>
-    </div>  
-    <div class="footer-item social-links">
-        <p><strong><h2>Follow us on</h2></strong></p>
-        <p><a href="#">Facebook</a></p>
-        <p><a href="#">Twitter</a></p>
-        <p><a href="#">Instagram</a></p>
-        <p><a href="#terms">Terms & Conditions</a></p>
-        </p>
-    </div>
-</footer>
+    <footer class="footer">
+        <div class="footer-item">
+            <h2>Contact Information</h2>
+            <p>Email: info@company.com<br>Phone: +123 456 7890</p>
+        </div>
+        <div class="footer-item">
+            <h2>Address</h2>
+            <p>123 Street, City, Country</p>
+        </div>
+        <div class="footer-item">
+            <h2>Terms and Conditions</h2>
+            <p><a href="#terms">Read our terms and conditions</a></p>
+        </div>
+        <div class="footer-item social-links">
+            <h2>Follow Us</h2>
+            <a href="#"><img src="images/facebook.png" alt="Facebook"></a>
+            <a href="#"><img src="images/twitter.png" alt="Twitter"></a>
+            <a href="#"><img src="images/instagram.png" alt="Instagram"></a>
+        </div>
+    </footer>
 
-
-    <script src="script.js"></script>
+    <!-- JavaScript for Automatic Slider -->
     <script>
-        let slideIndex = 0;
-        const slides = document.querySelectorAll('.slide');
+        let currentIndex = 0;
+        const slides = document.querySelector('.slides');
         const dots = document.querySelectorAll('.dot');
+        const totalSlides = document.querySelectorAll('.slide').length;
 
-        function showSlides() {
-            slides.forEach((slide, index) => {
-                slide.style.transform = `translateX(-${slideIndex * 100}%)`;
-                dots[index].className = dots[index].className.replace(' active', '');
+        const updateSlider = () => {
+            slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
             });
-            dots[slideIndex].className += ' active';
-        }
+        };
 
-        // Automatic slide change
-        function autoSlide() {
-            slideIndex = (slideIndex + 1) % slides.length;
-            showSlides();
-        }
+        const nextSlide = () => {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlider();
+        };
 
-        // Initialize slides
-        showSlides();
+        const prevSlide = () => {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        };
 
-        // Set interval for automatic slide change
-        setInterval(autoSlide, 3000); // Change slide every 3 seconds
+        document.querySelector('.right-arrow').addEventListener('click', nextSlide);
+        document.querySelector('.left-arrow').addEventListener('click', prevSlide);
 
-        // Add event listeners for arrows and dots
-        document.querySelector('.left-arrow').addEventListener('click', () => {
-            slideIndex = (slideIndex > 0) ? slideIndex - 1 : slides.length - 1;
-            showSlides();
-        });
-
-        document.querySelector('.right-arrow').addEventListener('click', () => {
-            slideIndex = (slideIndex < slides.length - 1) ? slideIndex + 1 : 0;
-            showSlides();
-        });
-
-        document.querySelectorAll('.dot').forEach((dot, index) => {
+        dots.forEach((dot, index) => {
             dot.addEventListener('click', () => {
-                slideIndex = index;
-                showSlides();
+                currentIndex = index;
+                updateSlider();
             });
         });
+
+        setInterval(nextSlide, 5000); // Change slide every 5 seconds
     </script>
 </body>
 </html>
